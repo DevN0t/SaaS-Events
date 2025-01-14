@@ -32,7 +32,10 @@ public class EventService {
 
             var event = new Event();
             event.setName(eventDTO.name());
+            event.setCreatedAt(java.time.LocalDateTime.now());
             event.setDescription(eventDTO.description());
+            event.setStatus(true);
+            event.setOnline(eventDTO.online());
             event.setCode(UUID.randomUUID().toString());
             event.setContact(eventDTO.contact());
             event.setLocation(eventDTO.location());
@@ -56,8 +59,9 @@ public class EventService {
 
             var event = eventRepository.findByIdAndBranchId(id, branchId);
             event.setName(eventDTO.name());
+            event.setOnline(eventDTO.online());
             event.setDescription(eventDTO.description());
-            event.setCode(UUID.randomUUID().toString());
+            event.setUpdatedAt(java.time.LocalDateTime.now());
             event.setContact(eventDTO.contact());
             event.setLocation(eventDTO.location());
             event.setDate(eventDTO.date());
@@ -79,9 +83,27 @@ public class EventService {
         return ResponseEntity.ok(eventRepository.findAllByBranchId(branchId));
     }
 
-    public ResponseEntity<List<EventDTO>> getEventById(HttpServletRequest request, Integer id) {
+    public ResponseEntity<EventDTO> getEventById(HttpServletRequest request, Integer id) {
         var token = request.getHeader("Authorization");
         var branchId = jwtService.getUserBranchFromJwt(token);
         return ResponseEntity.ok(eventRepository.findByBranchIdAndId(branchId, id));
     }
+
+    public ResponseEntity<StringReponse> deleteEvent(HttpServletRequest request, Integer id) {
+        try{
+            var token = request.getHeader("Authorization");
+            var branchId = jwtService.getUserBranchFromJwt(token);
+
+            var event = eventRepository.findByIdAndBranchId(id, branchId);
+            event.setStatus(false);
+            eventRepository.save(event);
+
+            return ResponseEntity.ok(new StringReponse("Evento deletado com sucesso!"));
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(new StringReponse("Erro ao deletar evento"));
+        }
+    }
+
 }

@@ -15,5 +15,6 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 
     List<EventShortDTO> findAllByBranchId(Integer branchId);
 
-    List<EventDTO> findByBranchIdAndId(Integer branchId, Integer id);
+    EventDTO findByBranchIdAndId(Integer branchId, Integer id);
+
 }

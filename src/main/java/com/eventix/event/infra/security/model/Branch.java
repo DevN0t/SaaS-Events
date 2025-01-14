@@ -1,4 +1,4 @@
-package com.eventix.event.modules.events.infra.model;
+package com.eventix.event.infra.security.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,35 +8,21 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "tb_events", schema = "events")
+@Table(name = "tb_branch", schema = "events")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Event {
+public class Branch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer branchId;
-
     private String name;
 
-    private String description;
-
-    private String code;
-
-    private String value;
-
-    private String location;
-
-    private String contact;
-
-    private Boolean online;
+    private String logo;
 
     private Boolean status;
-
-    private LocalDateTime date;
 
     private LocalDateTime createdAt;
 

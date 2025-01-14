@@ -7,6 +7,7 @@ public record EventCreateDTO(
         String description,
         String value,
         String location,
+        Boolean online,
         String contact,
         LocalDateTime date
 ) {

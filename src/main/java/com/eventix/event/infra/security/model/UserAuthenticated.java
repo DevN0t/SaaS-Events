@@ -2,10 +2,8 @@ package com.eventix.event.infra.security.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import com.eventix.event.infra.security.model.UserModel;
-
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class UserAuthenticated implements UserDetails {
 
@@ -18,7 +16,7 @@ public class UserAuthenticated implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "read");
+       return new ArrayList<>();
     }
 
     @Override

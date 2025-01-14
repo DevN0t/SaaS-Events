@@ -80,4 +80,9 @@ public class JwtService {
         var branch = userRepository.findUserModelByUsername(getSubjectFromJwt(jwtToken)).getBranch();
         return branch;
     }
+
+    public Boolean adminOnly(String jwtToken) {
+        var user = getUserFromJwt(jwtToken);
+        return user.getRole().equals("ADMIN");
+    }
 }
