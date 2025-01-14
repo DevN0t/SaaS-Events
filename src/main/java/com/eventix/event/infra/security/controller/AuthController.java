@@ -6,6 +6,7 @@ import com.eventix.event.infra.security.dto.ResponseDTO;
 import com.eventix.event.infra.security.dto.UserDTO;
 import com.eventix.event.infra.security.service.AuthService;
 import com.eventix.event.infra.security.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +24,9 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
-        return userService.getUsers();
+    @GetMapping("/users/")
+    public ResponseEntity<List<UserDTO>> getAllUsers(HttpServletRequest request){
+        return userService.getUsers(request);
     }
 
     @PostMapping("/auth")
@@ -34,12 +35,12 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<MessageReturnDTO> register(@RequestBody RegisterDTO data){
-       return userService.registerUser(data);
+    public ResponseEntity<MessageReturnDTO> register(HttpServletRequest request,@RequestBody RegisterDTO data){
+       return userService.registerUser(request, data);
     }
 
     @GetMapping("/verifyUsername")
-    public ResponseEntity<Boolean> verifyUsername(@RequestParam("username") String username){
-        return userService.verifyUsername(username);
+    public ResponseEntity<Boolean> verifyUsername(HttpServletRequest request ,@RequestParam("username") String username){
+        return userService.verifyUsername(request, username);
     }
 }
