@@ -7,6 +7,13 @@ services:
       - "8090:8090"
     networks:
       - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hello_world.rule=Host(`events.ryvo.com.br`)"
+      - "traefik.http.routers.hello_world.tls=true"
+      - "traefik.http.routers.hello_world.tls.certresolver=lets-encrypt"
+      - "traefik.http.services.hello_world.loadbalancer.server.port=8090"
+      - "traefik.docker.network=web"
 
 networks:
   web:
