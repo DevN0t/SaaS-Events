@@ -1,7 +1,7 @@
 services:
   app:
     build: .
-    container_name: events:1.0
+    container_name: events
     restart: always
     ports:
       - "8090:8090"
