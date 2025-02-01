@@ -1,7 +1,6 @@
 services:
   app:
     build: .
-    container_name: events
     restart: always
     ports:
       - "8090:8090"
@@ -9,10 +8,10 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.hello_world.rule=Host(`events.ryvo.com.br`)"
-      - "traefik.http.routers.hello_world.tls=true"
-      - "traefik.http.routers.hello_world.tls.certresolver=lets-encrypt"
-      - "traefik.http.services.hello_world.loadbalancer.server.port=8090"
+      - "traefik.http.routers.app.rule=Host(`events.ryvo.com.br`)"
+      - "traefik.http.routers.app.tls=true"
+      - "traefik.http.routers.app.tls.certresolver=lets-encrypt"
+      - "traefik.http.services.app.loadbalancer.server.port=8090"
       - "traefik.docker.network=web"
 
 networks:
