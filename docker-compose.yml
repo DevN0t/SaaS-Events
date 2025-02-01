@@ -8,10 +8,10 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.app.rule=Host(`events.ryvo.com.br`)"
-      - "traefik.http.routers.app.tls=true"
-      - "traefik.http.routers.app.tls.certresolver=lets-encrypt"
-      - "traefik.http.services.app.loadbalancer.server.port=8090"
+      - "traefik.http.routers.events.rule=Host(`events.ryvo.com.br`)"
+      - "traefik.http.routers.events.tls=true"
+      - "traefik.http.routers.events.tls.certresolver=lets-encrypt"
+      - "traefik.http.services.events.loadbalancer.server.port=8090"
       - "traefik.docker.network=web"
 
 networks:
