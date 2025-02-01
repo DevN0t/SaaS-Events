@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    container_name: events:1.0
+    restart: always
+    ports:
+      - "8090:8090"
+    networks:
+      - web
+
+networks:
+  web:

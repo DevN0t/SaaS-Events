@@ -17,7 +17,7 @@ WORKDIR /app
 # Copy the jar file from the build stage
 COPY --from=build /app/target/*.jar /app/app.jar
 
-EXPOSE 8080
+EXPOSE 8090
 
 # Default command to run the jar file
 ENTRYPOINT ["sh", "-c", "exec java ${JAVA_OPTS} -jar /app/app.jar"]
