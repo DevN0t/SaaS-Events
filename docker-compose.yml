@@ -2,6 +2,7 @@ services:
   events:
     build: .
     restart: always
+    pull_policy: build
     ports:
       - "8090:8090"
     networks:
